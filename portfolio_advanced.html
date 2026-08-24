@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio of Granth Maheshwari - Analytical student with expertise in web application design and teamwork.">
+    <title>Granth Maheshwari | Premium Interactive Portfolio</title>
+    <link rel="stylesheet" href="style_advanced.css">
+</head>
+<body class="theme-dark-glass">
+
+    <!-- Ambient background floating orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="layout-wrapper">
+        
+        <!-- ==========================================
+             STICKY LEFT SIDEBAR
+             ========================================== -->
+        <aside class="sidebar glass-panel">
+            
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-avatar-container">
+                    <div class="profile-glow"></div>
+                    <div class="profile-avatar">
+                        G
+                    </div>
+                </div>
+                <h1 class="profile-name">Granth Maheshwari</h1>
+                
+                <p class="profile-headline">Analytical student with expertise in web application design and teamwork.</p>
+                
+            </div>
+
+            <!-- Theme Picker -->
+            <div>
+                <h3 class="sidebar-title">⚡ Select Theme</h3>
+                <div class="theme-picker">
+                    <button class="theme-btn btn-dark active" onclick="setTheme('dark-glass')" title="Dark Glassmorphism"></button>
+                    <button class="theme-btn btn-light" onclick="setTheme('light-glass')" title="Light Glassmorphism"></button>
+                    <button class="theme-btn btn-cyber" onclick="setTheme('cyberpunk')" title="Cyberpunk Neon"></button>
+                    <button class="theme-btn btn-royal" onclick="setTheme('royal')" title="Royal Gold"></button>
+                </div>
+            </div>
+
+            <!-- Contact Links -->
+            <div class="contact-links">
+                <h3 class="sidebar-title">📬 Contact Info</h3>
+                
+                
+                <a href="mailto:granthmcheshwari6S@gmail.com" class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <span>granthmcheshwari6S@gmail.com</span>
+                </a>
+                
+
+                
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>+917523910887</span>
+                </div>
+                
+
+                
+                <a href="hif/www.finkedin.com/in/granfh-mcheshwari-23bb41330/" target="_blank" class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <span>LinkedIn Profile</span>
+                </a>
+                
+
+                
+                <a href="https://giihub.com/grcnfhmaheshwari65-sfack" target="_blank" class="contact-item">
+                    <span class="contact-icon">🐙</span>
+                    <span>GitHub Profile</span>
+                </a>
+                
+
+                <button onclick="window.print()" class="contact-item btn-pdf">
+                    <span class="contact-icon">📄</span>
+                    <span>Download PDF Resume</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- ==========================================
+             MAIN SCROLLABLE CONTENT
+             ========================================== -->
+        <main class="main-content">
+
+            <!-- Stats Banner -->
+            <section class="glass-panel stats-container">
+                <div class="stat-card">
+                    
+                    <div class="stat-number">1+</div>
+                    <div class="stat-label">Years of Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="project-count-stat">3+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="cert-count-stat">1+</div>
+                    <div class="stat-label">Certifications</div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            
+            <section class="glass-panel">
+                <h2 class="section-title">
+                    <span class="title-icon">👤</span>
+                    Professional Summary
+                </h2>
+                <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary);">
+                    Analytical student with expertise in web cooliccfion design and teamwork. Commiffed fo confribuiing innovative software developmeni projects. Eager learn and adapt, leveraging strong problem-solving and communication skills to support project goals.
+                </p>
+            </section>
+            
+
+            <!-- Interactive Skills section -->
+            
+            <section class="glass-panel">
+                <h2 class="section-title">
+                    <span class="title-icon">🛠️</span>
+                    Core Expertise
+                </h2>
+                <div class="skills-filter-wrapper">
+                    <!-- Search skills input -->
+                    <input type="text" id="skill-search" class="search-bar" placeholder="Search skills (e.g. Python, Machine Learning)..." onkeyup="filterSkillsBySearch()">
+                    
+                    <!-- Category Tabs -->
+                    <div class="filter-tabs">
+                        <button class="filter-tab-btn active" onclick="filterSkillCategory('all')">All Skills</button>
+                        <button class="filter-tab-btn" onclick="filterSkillCategory('tech')">Technical & Dev</button>
+                        <button class="filter-tab-btn" onclick="filterSkillCategory('soft')">Core & Methods</button>
+                    </div>
+
+                    <div class="skills-grid" id="skills-container">
+                        
+                        <span class="skill-tag" data-skill-name="html/css">
+                            <span>✨</span> HTML/CSS
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="javascript frameworks">
+                            <span>✨</span> JavaScript frameworks
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="api integration">
+                            <span>✨</span> API integration
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="full stack development">
+                            <span>✨</span> Full stack development
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="software engineering">
+                            <span>✨</span> Software engineering
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="web application design">
+                            <span>✨</span> Web application design
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="problem solving">
+                            <span>✨</span> Problem solving
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="strong debugging skills">
+                            <span>✨</span> Strong debugging skills
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="team effective communication">
+                            <span>✨</span> Team Effective communication
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="time management">
+                            <span>✨</span> Time management
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="campus planning">
+                            <span>✨</span> Campus planning
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="presentation skills">
+                            <span>✨</span> Presentation skills
+                        </span>
+                        
+                    </div>
+                </div>
+            </section>
+            
+
+            <!-- Experience Timeline -->
+            
+            <section class="glass-panel">
+                <h2 class="section-title">
+                    <span class="title-icon">💼</span>
+                    Work History
+                </h2>
+                <div class="timeline">
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">student ( CSE)</h3>
+                            <span class="timeline-date">May 202S-Currenf</span>
+                        </div>
+                        <div class="timeline-company">@ College</div>
+                        <ul class="timeline-bullets">
+                            
+                            <li>Gave presentations on current topics relevant fo the curriculum.</li>
+                            
+                            <li>Provided peer tutoring, sharing expertise and facilitating others' academic success.</li>
+                            
+                            <li>Participated in academic competitions, honing skills and gaining recognition.</li>
+                            
+                            <li>Attended workshops and seminars to enhance learning beyond the classroom.</li>
+                            
+                            <li>Parficipafed in a variety of campus events, such as career fairs, lectures, and workshops.</li>
+                            
+                            <li>Assisfed in organizing campus evenis and sfudenf activiiies.</li>
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </section>
+            
+
+            <!-- Featured Projects Bento Grid -->
+            
+
+            <!-- Grid for Education & Achievements -->
+            <div class="bottom-grid">
+                
+                
+                <section class="glass-panel">
+                    <h2 class="section-title">
+                        <span class="title-icon">🎓</span>
+                        Education
+                    </h2>
+                    
+                    <div class="edu-item">
+                        <div class="edu-degree">Bachelor in Technology Computer Science (Full Stack Developer)</div>
+                        <div class="edu-institution">GLA University, Mathura</div>
+                        <div class="edu-year">May 2029</div>
+                    </div>
+                    
+                </section>
+                
+
+                
+                <section class="glass-panel">
+                    <h2 class="section-title">
+                        <span class="title-icon">🏆</span>
+                        Honors & Badges
+                    </h2>
+                    <ul class="achievement-row">
+                        
+                        <li>Gained recognition through participation in academic competitions.</li>
+                        
+                    </ul>
+                </section>
+                
+
+            </div>
+
+            <footer>
+                <p>© <span id="current-year"></span> Granth Maheshwari • Premium Dynamic Portfolio Portfolio</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- ==========================================
+         INTERACTIVE CASE STUDY MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="project-modal" onclick="closeProjectModal(event)">
+        <div class="glass-panel modal-container" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 id="modal-title" style="font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">Project Details</h3>
+                <button class="modal-close" onclick="closeProjectModal(null)">✕</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 700;">Challenge & Solution</h4>
+                    <p id="modal-description" style="color: var(--text-secondary); line-height: 1.6; font-size: 0.98rem;"></p>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 700;">Tech Stack</h4>
+                    <div id="modal-tech" class="project-tech-row"></div>
+                </div>
+                <div style="margin-top: 15px; display: flex; gap: 12px;">
+                    <a href="#" class="contact-item btn-pdf" style="margin: 0; padding: 10px 20px; font-size: 0.85rem;" onclick="alert('Demo feature coming soon!'); return false;">🌐 Launch Live Demo</a>
+                    <button class="contact-item" style="margin: 0; padding: 10px 20px; font-size: 0.85rem; background: transparent;" onclick="closeProjectModal(null)">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT CONTROLS
+         ========================================== -->
+    <!--<script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 1. Theme Switcher Logic
+        function setTheme(themeName) {
+            // Remove previous theme classes
+            document.body.classList.remove('theme-dark-glass', 'theme-light-glass', 'theme-cyberpunk', 'theme-royal');
+            // Add new theme class
+            document.body.classList.add('theme-' + themeName);
+            
+            // Update active status on buttons
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.querySelector('.btn-' + themeName.split('-')[0]);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Save preference
+            localStorage.setItem('portfolio-theme', themeName);
+        }
+
+        // Restore theme selection on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark-glass';
+            setTheme(savedTheme);
+            categorizeSkillsOnLoad();
+        });
+
+        // 2. Skill Categorization and Interactive Filter
+        const techKeywords = ['python', 'programming', 'machine', 'learning', 'data', 'analysis', 'engineering', 'modeling', 'visualization', 'c', 'frontend', 'development', 'ai', 'sql', 'html', 'css', 'javascript', 'git'];
+
+        function categorizeSkillsOnLoad() {
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                const skillName = tag.getAttribute('data-skill-name');
+                // Detect if technical
+                const isTech = techKeywords.some(keyword => skillName.includes(keyword));
+                if (isTech) {
+                    tag.setAttribute('data-category', 'tech');
+                } else {
+                    tag.setAttribute('data-category', 'soft');
+                }
+            });
+        }
+
+        function filterSkillCategory(category) {
+            // Update active tab styling
+            document.querySelectorAll('.filter-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                const cat = tag.getAttribute('data-category');
+                if (category === 'all' || cat === category) {
+                    tag.classList.remove('hidden');
+                } else {
+                    tag.classList.add('hidden');
+                }
+            });
+            // Clear search bar when changing tabs
+            document.getElementById('skill-search').value = '';
+        }
+
+        function filterSkillsBySearch() {
+            const query = document.getElementById('skill-search').value.toLowerCase().trim();
+            const skillTags = document.querySelectorAll('.skill-tag');
+            
+            // Remove active category filter styling to show query results across categories
+            document.querySelectorAll('.filter-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.filter-tab-btn')[0].classList.add('active'); // 'All Skills' becomes active
+
+            skillTags.forEach(tag => {
+                const name = tag.getAttribute('data-skill-name');
+                if (name.includes(query)) {
+                    tag.classList.remove('hidden');
+                } else {
+                    tag.classList.add('hidden');
+                }
+            });
+        }
+
+        // 3. Project Details Modal Logic
+        function openProjectModal(title, description, techString) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-description').textContent = description;
+            
+            // Clear and build tech tags
+            const techContainer = document.getElementById('modal-tech');
+            techContainer.innerHTML = '';
+            
+            if (techString.trim()) {
+                const technologies = techString.split(', ');
+                technologies.forEach(tech => {
+                    const span = document.createElement('span');
+                    span.className = 'tech-tag';
+                    span.textContent = tech;
+                    techContainer.appendChild(span);
+                });
+            }
+            
+            document.getElementById('project-modal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        }
+
+        function closeProjectModal(e) {
+            if (e === null || e.target === document.getElementById('project-modal')) {
+                document.getElementById('project-modal').classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enable background scrolling
+            }
+        }
+    </script>-->
+</body>
+</html>
