@@ -17,7 +17,11 @@ try:
 except ImportError:
     print("Warning: Could not import get_portfolio_json_from_gemini and generate_html_portfolio from main.py")
 
-template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+base_dir = os.path.dirname(os.path.abspath(__file__))
+template_dir = os.path.join(base_dir, 'templates')
+if not os.path.exists(os.path.join(template_dir, 'upload.html')):
+    template_dir = base_dir
+
 app = Flask(__name__, static_url_path='/static', static_folder='.', template_folder=template_dir)
 app.secret_key = os.environ.get('SECRET_KEY', 'ai-portfolio-generator-secret-key-12983')
 
@@ -38,12 +42,7 @@ def handle_exception(e):
 @app.route('/')
 def index():
     """Renders the main upload dashboard."""
-    res = []
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    for root, dirs, files in os.walk(base_path):
-        for f in files:
-            res.append(os.path.relpath(os.path.join(root, f), base_path))
-    return f"<h1>Debug Files</h1><pre>" + "\n".join(res) + f"</pre><br>template_dir: {template_dir}"
+    return render_template('upload.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
