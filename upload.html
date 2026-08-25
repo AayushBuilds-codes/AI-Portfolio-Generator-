@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Upload | AI Portfolio Generator</title>
+    <!-- Use Outfit and Plus Jakarta Sans from Google Fonts -->
+    <link rel="stylesheet" href="/static/style_advanced.css" id="theme-stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .upload-container {
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .drop-zone {
+            border: 2px dashed var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: var(--glass-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+            background: rgba(168, 85, 247, 0.05);
+        }
+
+        .drop-zone-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .drop-zone:hover .drop-zone-icon {
+            transform: translateY(-5px);
+        }
+
+        .drop-zone-text {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .drop-zone-info {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .status-container {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-text {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .status-subtext {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .preview-container {
+            margin-top: 25px;
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .preview-title {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-textarea {
+            width: 100%;
+            height: 250px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            color: var(--text-primary);
+            padding: 15px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+            outline: none;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+
+        .preview-textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow), inset 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--accent), #7c3aed);
+            color: #fff;
+            border: none;
+            border-radius: var(--border-radius-md);
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            margin-top: 25px;
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .result-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .success-icon {
+            font-size: 3.5rem;
+            color: #10b981;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .portfolio-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .portfolio-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 12px 20px;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .portfolio-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px var(--accent-glow);
+            color: #fff;
+        }
+
+        .portfolio-btn.secondary {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid var(--accent);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 15px;
+            border-radius: var(--border-radius-md);
+            margin-top: 20px;
+            display: none;
+            text-align: left;
+        }
+
+        /* Ambient floating orbs */
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+
+        .orb-1 {
+            top: 10%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+        }
+
+        .orb-2 {
+            bottom: 10%;
+            right: 10%;
+            width: 350px;
+            height: 350px;
+            background: #7c3aed;
+        }
+    </style>
+</head>
+<body class="theme-dark-glass">
+
+    <!-- Ambient background floating orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="upload-container">
+        <div class="header-section">
+            <h1 class="header-title">AI Portfolio Generator</h1>
+            <p class="header-subtitle">Upload your resume to generate standard and premium portfolios automatically.</p>
+        </div>
+
+        <!-- Warning banner if opened directly as file -->
+        <div id="local-warning" class="error-message" style="display: none; border-color: #eab308; background: rgba(234, 179, 8, 0.15); color: #fef08a; margin-bottom: 20px;">
+            ⚠️ <strong>Running locally as a file:</strong> You have opened this HTML file directly in your browser. 
+            The resume uploader and portfolio generator require the backend server to process files.
+            <br><br>
+            Please open <strong><a href="http://127.0.0.1:5000/" style="color: #fff; text-decoration: underline;">http://127.0.0.1:5000/</a></strong> instead.
+        </div>
+
+        <div class="glass-panel" style="padding: 30px; border-radius: var(--border-radius-lg);">
+            <div id="drop-zone" class="drop-zone">
+                <span class="drop-zone-icon">📁</span>
+                <p class="drop-zone-text">Drag & drop your resume here</p>
+                <p class="drop-zone-info">Supports PDF, TXT, PNG, JPG, JPEG, WEBP (Max 10MB)</p>
+                <p class="drop-zone-info" style="margin-top: 15px; color: var(--accent); font-weight: 600;">or click to browse files</p>
+                <input type="file" id="file-input" accept=".txt,.pdf,.png,.jpg,.jpeg,.webp">
+            </div>
+
+            <div id="error-box" class="error-message"></div>
+
+            <div id="status-box" class="status-container">
+                <div class="spinner"></div>
+                <div id="status-title" class="status-text">Uploading Resume...</div>
+                <div id="status-desc" class="status-subtext">Sending file to server</div>
+            </div>
+
+            <div id="preview-box" class="preview-container">
+                <div class="preview-title">
+                    <span>📝 Extracted Resume Text</span>
+                    <span style="font-size: 0.8rem; color: var(--text-dim); font-weight: normal;">Verify and edit if needed</span>
+                </div>
+                <textarea id="extracted-text" class="preview-textarea" placeholder="Extracted resume text will appear here..."></textarea>
+                <button id="generate-btn" class="action-btn">
+                    <span>✨</span> Generate Portfolio Web Pages
+                </button>
+            </div>
+
+            <div id="result-box" class="result-container">
+                <div class="result-card">
+                    <span class="success-icon">🎉</span>
+                    <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 10px;">Portfolios Generated!</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 25px;">We successfully processed your resume and created two custom portfolio options.</p>
+                    
+                    <div class="portfolio-links">
+                        <a href="/portfolio" target="_blank" class="portfolio-btn">
+                            📄 Standard Template
+                        </a>
+                        <a href="/portfolio_advanced" target="_blank" class="portfolio-btn secondary">
+                            👑 Premium Template
+                        </a>
+                    </div>
+                    
+                    <button id="reset-btn" class="portfolio-btn" style="margin-top: 25px; width: 100%; background: transparent; border: 1px dashed var(--glass-border);">
+                        🔄 Upload Another Resume
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const errorBox = document.getElementById('error-box');
+        const statusBox = document.getElementById('status-box');
+        const statusTitle = document.getElementById('status-title');
+        const statusDesc = document.getElementById('status-desc');
+        const previewBox = document.getElementById('preview-box');
+        const extractedTextTextarea = document.getElementById('extracted-text');
+        const generateBtn = document.getElementById('generate-btn');
+        const resultBox = document.getElementById('result-box');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Drag and drop handlers
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, e => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, e => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+            }, false);
+        });
+
+        dropZone.addEventListener('drop', e => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+
+        function showError(message) {
+            errorBox.textContent = message;
+            errorBox.style.display = 'block';
+            statusBox.style.display = 'none';
+        }
+
+        function clearError() {
+            errorBox.style.display = 'none';
+        }
+
+        function handleFile(file) {
+            clearError();
+            
+            // Validate file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                showError('File is too large. Maximum size allowed is 10MB.');
+                return;
+            }
+
+            // Validate extension
+            const ext = file.name.split('.').pop().toLowerCase();
+            const allowed = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'webp'];
+            if (!allowed.includes(ext)) {
+                showError('Unsupported file type. Please upload a PDF, TXT, or Image file.');
+                return;
+            }
+
+            // Show loading status
+            dropZone.style.display = 'none';
+            statusBox.style.display = 'block';
+            previewBox.style.display = 'none';
+            resultBox.style.display = 'none';
+            
+            statusTitle.textContent = 'Uploading Resume...';
+            statusDesc.textContent = `Processing file: ${file.name}`;
+
+            const formData = new FormData();
+            formData.append('resume_file', file);
+
+            // Upload and extract text
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Server error occurred during processing.');
+                }
+                return data;
+            })
+            .then(data => {
+                statusBox.style.display = 'none';
+                previewBox.style.display = 'block';
+                extractedTextTextarea.value = data.extracted_text;
+            })
+            .catch(error => {
+                console.error(error);
+                dropZone.style.display = 'block';
+                showError(`Extraction failed: ${error.message}`);
+            });
+        }
+
+        // Generate Portfolio handler
+        generateBtn.addEventListener('click', () => {
+            const textContent = extractedTextTextarea.value.trim();
+            if (!textContent) {
+                alert('Resume text cannot be empty.');
+                return;
+            }
+
+            // Show loading status for generation
+            previewBox.style.display = 'none';
+            statusBox.style.display = 'block';
+            statusTitle.textContent = 'Analyzing with Gemini API...';
+            statusDesc.textContent = 'Extracting skills, experiences, and styling parameters (this may take a few seconds)';
+
+            fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ resume_text: textContent })
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Server error during generation.');
+                }
+                return data;
+            })
+            .then(data => {
+                statusBox.style.display = 'none';
+                resultBox.style.display = 'block';
+            })
+            .catch(error => {
+                console.error(error);
+                previewBox.style.display = 'block';
+                showError(`Generation failed: ${error.message}`);
+            });
+        });
+
+        // Reset page
+        resetBtn.addEventListener('click', () => {
+            fileInput.value = '';
+            dropZone.style.display = 'block';
+            previewBox.style.display = 'none';
+            resultBox.style.display = 'none';
+            clearError();
+        });
+
+        // Detect local file usage and apply styling fallback & warning banner
+        if (window.location.protocol === 'file:') {
+            const stylesheet = document.getElementById('theme-stylesheet');
+            if (stylesheet) {
+                stylesheet.setAttribute('href', '../style_advanced.css');
+            }
+            const warning = document.getElementById('local-warning');
+            if (warning) {
+                warning.style.display = 'block';
+            }
+            const dropZoneEl = document.getElementById('drop-zone');
+            if (dropZoneEl) {
+                dropZoneEl.style.pointerEvents = 'none';
+                dropZoneEl.style.opacity = '0.7';
+                dropZoneEl.style.cursor = 'not-allowed';
+            }
+        }
+    </script>
+</body>
+</html>

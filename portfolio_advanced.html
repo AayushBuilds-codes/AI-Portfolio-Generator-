@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio of AAYUSH AGARWAL - ">
+    <title>AAYUSH AGARWAL | Premium Interactive Portfolio</title>
+    <link rel="stylesheet" href="/static/style_advanced.css">
+</head>
+<body class="theme-dark-glass">
+
+    <!-- Ambient background floating orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="layout-wrapper">
+        
+        <!-- ==========================================
+             STICKY LEFT SIDEBAR
+             ========================================== -->
+        <aside class="sidebar glass-panel">
+            
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-avatar-container">
+                    <div class="profile-glow"></div>
+                    <div class="profile-avatar">
+                        A
+                    </div>
+                </div>
+                <h1 class="profile-name">AAYUSH AGARWAL</h1>
+                
+            </div>
+
+            <!-- Theme Picker -->
+            <div>
+                <h3 class="sidebar-title">⚡ Select Theme</h3>
+                <div class="theme-picker">
+                    <button class="theme-btn btn-dark active" onclick="setTheme('dark-glass')" title="Dark Glassmorphism"></button>
+                    <button class="theme-btn btn-light" onclick="setTheme('light-glass')" title="Light Glassmorphism"></button>
+                    <button class="theme-btn btn-cyber" onclick="setTheme('cyberpunk')" title="Cyberpunk Neon"></button>
+                    <button class="theme-btn btn-royal" onclick="setTheme('royal')" title="Royal Gold"></button>
+                </div>
+            </div>
+
+            <!-- Contact Links -->
+            <div class="contact-links">
+                <h3 class="sidebar-title">📬 Contact Info</h3>
+                
+                
+                <a href="mailto:aayushagarwaltech@gmail.com" class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <span>aayushagarwaltech@gmail.com</span>
+                </a>
+                
+
+                
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>+91 9569923319</span>
+                </div>
+                
+
+                
+                <a href="https://www.linkedin.com/in/aayush-agarwal-64a461284/" target="_blank" class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <span>LinkedIn Profile</span>
+                </a>
+                
+
+                
+                <a href="https://github.com/AayushBuilds-codes" target="_blank" class="contact-item">
+                    <span class="contact-icon">🐙</span>
+                    <span>GitHub Profile</span>
+                </a>
+                
+
+                <button onclick="window.print()" class="contact-item btn-pdf">
+                    <span class="contact-icon">📄</span>
+                    <span>Download PDF Resume</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- ==========================================
+             MAIN SCROLLABLE CONTENT
+             ========================================== -->
+        <main class="main-content">
+
+            <!-- Stats Banner -->
+            <section class="glass-panel stats-container">
+                <div class="stat-card">
+                    
+                    <div class="stat-number">1+</div>
+                    <div class="stat-label">Years of Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="project-count-stat">3+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="cert-count-stat">22+</div>
+                    <div class="stat-label">Certifications</div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            
+            <section class="glass-panel">
+                <h2 class="section-title">
+                    <span class="title-icon">👤</span>
+                    Professional Summary
+                </h2>
+                <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary);">
+                    Driven Computer Science (AI & ML) student with hands-on experience in full-stack web development and machine learning. Proven ability to build scalable web applications, train machine learning models, and integrate third-party APIs. Eager to leverage technical skills in Python, JavaScript, and data analysis to contribute to impactful engineering projects.
+                </p>
+            </section>
+            
+
+            <!-- Interactive Skills section -->
+            
+            <section class="glass-panel">
+                <h2 class="section-title">
+                    <span class="title-icon">🛠️</span>
+                    Core Expertise
+                </h2>
+                <div class="skills-filter-wrapper">
+                    <!-- Search skills input -->
+                    <input type="text" id="skill-search" class="search-bar" placeholder="Search skills (e.g. Python, Machine Learning)..." onkeyup="filterSkillsBySearch()">
+                    
+                    <!-- Category Tabs -->
+                    <div class="filter-tabs">
+                        <button class="filter-tab-btn active" onclick="filterSkillCategory('all')">All Skills</button>
+                        <button class="filter-tab-btn" onclick="filterSkillCategory('tech')">Technical & Dev</button>
+                        <button class="filter-tab-btn" onclick="filterSkillCategory('soft')">Core & Methods</button>
+                    </div>
+
+                    <div class="skills-grid" id="skills-container">
+                        
+                        <span class="skill-tag" data-skill-name="python">
+                            <span>✨</span> Python
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="java">
+                            <span>✨</span> Java
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="c">
+                            <span>✨</span> C
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="javascript">
+                            <span>✨</span> JavaScript
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="html5">
+                            <span>✨</span> HTML5
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="css3">
+                            <span>✨</span> CSS3
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="node.js">
+                            <span>✨</span> Node.js
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="frontend development">
+                            <span>✨</span> Frontend Development
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="backend development">
+                            <span>✨</span> Backend Development
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="scikit-learn">
+                            <span>✨</span> Scikit-learn
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="pandas">
+                            <span>✨</span> Pandas
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="numpy">
+                            <span>✨</span> NumPy
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="matplotlib">
+                            <span>✨</span> Matplotlib
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="data preprocessing">
+                            <span>✨</span> Data Preprocessing
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="feature engineering">
+                            <span>✨</span> Feature Engineering
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="statistical modeling">
+                            <span>✨</span> Statistical Modeling
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="seaborn">
+                            <span>✨</span> Seaborn
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="git">
+                            <span>✨</span> Git
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="restful api integration">
+                            <span>✨</span> RESTful API Integration
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="vs code">
+                            <span>✨</span> VS Code
+                        </span>
+                        
+                        <span class="skill-tag" data-skill-name="ui/ux prototyping">
+                            <span>✨</span> UI/UX Prototyping
+                        </span>
+                        
+                    </div>
+                </div>
+            </section>
+            
+
+            <!-- Experience Timeline -->
+            
+            <section class="glass-panel">
+                <h2 class="section-title">
+                    <span class="title-icon">💼</span>
+                    Work History
+                </h2>
+                <div class="timeline">
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Artificial Intelligence Intern</h3>
+                            <span class="timeline-date">12/2025 – 01/2026</span>
+                        </div>
+                        <div class="timeline-company">@ Jyesta Corporation Limited</div>
+                        <ul class="timeline-bullets">
+                            
+                            <li>Developed and trained Machine Learning models using Python and Scikit-learn to address core business requirements.</li>
+                            
+                            <li>Preprocessed, cleaned, and engineered features across multi-source datasets to optimize model performance and accuracy.</li>
+                            
+                            <li>Generated data visualizations using Pandas, NumPy, and Matplotlib to derive actionable insights.</li>
+                            
+                            <li>Collaborated with senior developers on AI research and workflow optimization.</li>
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </section>
+            
+
+            <!-- Featured Projects Bento Grid -->
+            
+
+            <!-- Grid for Education & Achievements -->
+            <div class="bottom-grid">
+                
+                
+                <section class="glass-panel">
+                    <h2 class="section-title">
+                        <span class="title-icon">🎓</span>
+                        Education
+                    </h2>
+                    
+                    <div class="edu-item">
+                        <div class="edu-degree">Bachelor of Technology (B.Tech) in Computer Science (AI & ML)</div>
+                        <div class="edu-institution">GLA University, Mathura, India</div>
+                        <div class="edu-year">May 2029</div>
+                    </div>
+                    
+                    <div class="edu-item">
+                        <div class="edu-degree">Secondary Education (Class 10th)</div>
+                        <div class="edu-institution">Dr. Virendra Swarup Education Centre, Kanpur, India</div>
+                        <div class="edu-year">2023</div>
+                    </div>
+                    
+                    <div class="edu-item">
+                        <div class="edu-degree">Senior Secondary Education (Class 12th)</div>
+                        <div class="edu-institution">The Jain International School, Kanpur, India</div>
+                        <div class="edu-year">2025</div>
+                    </div>
+                    
+                </section>
+                
+
+                
+                <section class="glass-panel">
+                    <h2 class="section-title">
+                        <span class="title-icon">🏆</span>
+                        Honors & Badges
+                    </h2>
+                    <ul class="achievement-row">
+                        
+                        <li>Azure Fundamentals - Microsoft</li>
+                        
+                        <li>AI Passport Skills - Microsoft</li>
+                        
+                        <li>AI for K12 Educators – Microsoft / Google</li>
+                        
+                        <li>Digital Skill Builder, Ambassador, Career Explorer & Communication Clarity – HP Life</li>
+                        
+                        <li>Introduction to AI - Google</li>
+                        
+                        <li>Building an App with Code Agents and MongoDB</li>
+                        
+                        <li>AI and Innovation: How MongoDB Enables a Resilient AI Strategy</li>
+                        
+                        <li>From Relational Model (SQL) to MongoDB's Document Model</li>
+                        
+                        <li>MongoDB Overview: Core Concepts and Architecture</li>
+                        
+                        <li>Technology, Data Analytics & Cyber Job Simulations – Deloitte Australia</li>
+                        
+                        <li>GenAI Powered Data Analytics Simulation – Tata</li>
+                        
+                        <li>AI in Action Simulation – Vista Equity Partners</li>
+                        
+                        <li>Data Analytics Simulation – Quantium</li>
+                        
+                        <li>GenAI Simulation – BCG</li>
+                        
+                        <li>Data Science Job Simulation – British Airways</li>
+                        
+                        <li>HackerRank Certifications: Problem Solving</li>
+                        
+                        <li>HackerRank Certifications: Javascript</li>
+                        
+                        <li>HackerRank Certifications: SQL</li>
+                        
+                        <li>HackerRank Certifications: Python</li>
+                        
+                        <li>HackerRank Certifications: CSS</li>
+                        
+                        <li>HackerRank Certifications: Rest API</li>
+                        
+                        <li>HackerRank Certifications: Software Engineer (Intern)</li>
+                        
+                    </ul>
+                </section>
+                
+
+            </div>
+
+            <footer>
+                <p>© <span id="current-year"></span> AAYUSH AGARWAL • Premium Dynamic Portfolio Portfolio</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- ==========================================
+         INTERACTIVE CASE STUDY MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="project-modal" onclick="closeProjectModal(event)">
+        <div class="glass-panel modal-container" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 id="modal-title" style="font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">Project Details</h3>
+                <button class="modal-close" onclick="closeProjectModal(null)">✕</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 700;">Challenge & Solution</h4>
+                    <p id="modal-description" style="color: var(--text-secondary); line-height: 1.6; font-size: 0.98rem;"></p>
+                </div>
+                <div>
+                    <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 700;">Tech Stack</h4>
+                    <div id="modal-tech" class="project-tech-row"></div>
+                </div>
+                <div style="margin-top: 15px; display: flex; gap: 12px;">
+                    <a href="#" class="contact-item btn-pdf" style="margin: 0; padding: 10px 20px; font-size: 0.85rem;" onclick="alert('Demo feature coming soon!'); return false;">🌐 Launch Live Demo</a>
+                    <button class="contact-item" style="margin: 0; padding: 10px 20px; font-size: 0.85rem; background: transparent;" onclick="closeProjectModal(null)">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT CONTROLS
+         ========================================== -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 1. Theme Switcher Logic
+        function setTheme(themeName) {
+            // Remove previous theme classes
+            document.body.classList.remove('theme-dark-glass', 'theme-light-glass', 'theme-cyberpunk', 'theme-royal');
+            // Add new theme class
+            document.body.classList.add('theme-' + themeName);
+            
+            // Update active status on buttons
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.querySelector('.btn-' + themeName.split('-')[0]);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Save preference
+            localStorage.setItem('portfolio-theme', themeName);
+        }
+
+        // Restore theme selection on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark-glass';
+            setTheme(savedTheme);
+            categorizeSkillsOnLoad();
+        });
+
+        // 2. Skill Categorization and Interactive Filter
+        const techKeywords = ['python', 'programming', 'machine', 'learning', 'data', 'analysis', 'engineering', 'modeling', 'visualization', 'c', 'frontend', 'development', 'ai', 'sql', 'html', 'css', 'javascript', 'git'];
+
+        function categorizeSkillsOnLoad() {
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                const skillName = tag.getAttribute('data-skill-name');
+                // Detect if technical
+                const isTech = techKeywords.some(keyword => skillName.includes(keyword));
+                if (isTech) {
+                    tag.setAttribute('data-category', 'tech');
+                } else {
+                    tag.setAttribute('data-category', 'soft');
+                }
+            });
+        }
+
+        function filterSkillCategory(category) {
+            // Update active tab styling
+            document.querySelectorAll('.filter-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                const cat = tag.getAttribute('data-category');
+                if (category === 'all' || cat === category) {
+                    tag.classList.remove('hidden');
+                } else {
+                    tag.classList.add('hidden');
+                }
+            });
+            // Clear search bar when changing tabs
+            document.getElementById('skill-search').value = '';
+        }
+
+        function filterSkillsBySearch() {
+            const query = document.getElementById('skill-search').value.toLowerCase().trim();
+            const skillTags = document.querySelectorAll('.skill-tag');
+            
+            // Remove active category filter styling to show query results across categories
+            document.querySelectorAll('.filter-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.filter-tab-btn')[0].classList.add('active'); // 'All Skills' becomes active
+
+            skillTags.forEach(tag => {
+                const name = tag.getAttribute('data-skill-name');
+                if (name.includes(query)) {
+                    tag.classList.remove('hidden');
+                } else {
+                    tag.classList.add('hidden');
+                }
+            });
+        }
+
+        // 3. Project Details Modal Logic
+        function openProjectModal(title, description, techString) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-description').textContent = description;
+            
+            // Clear and build tech tags
+            const techContainer = document.getElementById('modal-tech');
+            techContainer.innerHTML = '';
+            
+            if (techString.trim()) {
+                const technologies = techString.split(', ');
+                technologies.forEach(tech => {
+                    const span = document.createElement('span');
+                    span.className = 'tech-tag';
+                    span.textContent = tech;
+                    techContainer.appendChild(span);
+                });
+            }
+            
+            document.getElementById('project-modal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        }
+
+        function closeProjectModal(e) {
+            if (e === null || e.target === document.getElementById('project-modal')) {
+                document.getElementById('project-modal').classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enable background scrolling
+            }
+        }
+    </script>
+</body>
+</html>
