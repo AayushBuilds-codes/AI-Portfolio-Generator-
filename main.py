@@ -117,8 +117,10 @@ def get_portfolio_json_from_gemini(resume_text):
     except Exception as e:
         raise RuntimeError(f"Gemini API request failed: {e}") from e
 
-def generate_html_portfolio(portfolio_data):
+def generate_html_portfolio(portfolio_data, output_dir=None):
     """Uses Jinja2 template to generate HTML from JSON data."""
+    if output_dir is None:
+        output_dir = "/tmp" if "VERCEL" in os.environ else BASE_DIR
     try:
         # Load the Jinja2 environment
         env = Environment(loader=FileSystemLoader(BASE_DIR))
@@ -126,16 +128,16 @@ def generate_html_portfolio(portfolio_data):
         # 1. Render standard portfolio
         template_standard = env.get_template('template.html')
         html_out_standard = template_standard.render(data=portfolio_data)
-        with open(os.path.join(BASE_DIR, "portfolio.html"), "w", encoding="utf-8") as f:
+        with open(os.path.join(output_dir, "portfolio.html"), "w", encoding="utf-8") as f:
             f.write(html_out_standard)
-        print("Success! Generated portfolio.html")
+        print(f"Success! Generated portfolio.html in {output_dir}")
         
         # 2. Render advanced portfolio
         template_advanced = env.get_template('template_advanced.html')
         html_out_advanced = template_advanced.render(data=portfolio_data)
-        with open(os.path.join(BASE_DIR, "portfolio_advanced.html"), "w", encoding="utf-8") as f:
+        with open(os.path.join(output_dir, "portfolio_advanced.html"), "w", encoding="utf-8") as f:
             f.write(html_out_advanced)
-        print("Success! Generated portfolio_advanced.html")
+        print(f"Success! Generated portfolio_advanced.html in {output_dir}")
         
     except Exception as e:
         raise RuntimeError(f"Error generating HTML: {e}") from e
