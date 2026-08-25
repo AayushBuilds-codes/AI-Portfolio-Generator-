@@ -3,7 +3,7 @@ import sys
 import json
 import mimetypes
 from werkzeug.utils import secure_filename
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory, session, redirect, url_for
 from dotenv import load_dotenv
 from google.genai import types
 
@@ -17,7 +17,9 @@ try:
 except ImportError:
     print("Warning: Could not import get_portfolio_json_from_gemini and generate_html_portfolio from main.py")
 
-app = Flask(__name__, static_url_path='/static', static_folder='.', template_folder='templates')
+template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app = Flask(__name__, static_url_path='/static', static_folder='.', template_folder=template_dir)
+app.secret_key = os.environ.get('SECRET_KEY', 'ai-portfolio-generator-secret-key-12983')
 
 # Configure upload constraints
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'webp'}
@@ -25,6 +27,13 @@ app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10MB limit
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+import traceback
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """Return HTML traceback on 500 errors for debugging."""
+    return f"<h1>Internal Server Error (Traceback)</h1><pre>{traceback.format_exc()}</pre>", 500
 
 @app.route('/')
 def index():
@@ -98,8 +107,11 @@ def upload_file():
             return jsonify({'error': 'Failed to extract any text from the file.'}), 400
 
         # Save the extracted text to resume.txt (as requested)
-        with open(os.path.join(app.root_path, "resume.txt"), "w", encoding="utf-8") as f:
-            f.write(extracted_text)
+        try:
+            with open(os.path.join(app.root_path, "resume.txt"), "w", encoding="utf-8") as f:
+                f.write(extracted_text)
+        except OSError as e:
+            print(f"Warning: Could not write resume.txt (read-only filesystem on Vercel): {e}")
             
         return jsonify({
             'success': True,
@@ -128,8 +140,11 @@ def generate_portfolio():
         
     try:
         # 1. Update resume.txt with the final text (in case user edited it on UI)
-        with open(os.path.join(app.root_path, "resume.txt"), "w", encoding="utf-8") as f:
-            f.write(resume_text)
+        try:
+            with open(os.path.join(app.root_path, "resume.txt"), "w", encoding="utf-8") as f:
+                f.write(resume_text)
+        except OSError as e:
+            print(f"Warning: Could not write resume.txt (read-only filesystem on Vercel): {e}")
             
         # 2. Request JSON structure from Gemini
         print("Sending resume text to Gemini to generate structured portfolio JSON...")
@@ -137,6 +152,9 @@ def generate_portfolio():
         
         # 3. Parse JSON
         portfolio_dict = json.loads(json_response)
+        
+        # Store in session for on-the-fly rendering fallback
+        session['portfolio_data'] = portfolio_dict
         
         # 4. Generate standard and advanced html pages
         print("Rendering HTML templates...")
@@ -160,12 +178,40 @@ def generate_portfolio():
 @app.route('/portfolio')
 def view_portfolio():
     """Serves the standard portfolio page."""
-    return send_from_directory(app.root_path, 'portfolio.html')
+    directory = "/tmp" if "VERCEL" in os.environ else app.root_path
+    filepath = os.path.join(directory, 'portfolio.html')
+    
+    if not os.path.exists(filepath):
+        portfolio_data = session.get('portfolio_data')
+        if portfolio_data:
+            try:
+                generate_html_portfolio(portfolio_data)
+            except Exception as e:
+                print(f"Error regenerating standard portfolio: {e}")
+                return "Portfolio file not found and regeneration failed.", 404
+        else:
+            return redirect(url_for('index'))
+            
+    return send_from_directory(directory, 'portfolio.html')
 
 @app.route('/portfolio_advanced')
 def view_portfolio_advanced():
     """Serves the advanced/premium portfolio page."""
-    return send_from_directory(app.root_path, 'portfolio_advanced.html')
+    directory = "/tmp" if "VERCEL" in os.environ else app.root_path
+    filepath = os.path.join(directory, 'portfolio_advanced.html')
+    
+    if not os.path.exists(filepath):
+        portfolio_data = session.get('portfolio_data')
+        if portfolio_data:
+            try:
+                generate_html_portfolio(portfolio_data)
+            except Exception as e:
+                print(f"Error regenerating advanced portfolio: {e}")
+                return "Advanced portfolio file not found and regeneration failed.", 404
+        else:
+            return redirect(url_for('index'))
+            
+    return send_from_directory(directory, 'portfolio_advanced.html')
 
 if __name__ == '__main__':
     # Run server on port 5000
