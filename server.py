@@ -38,7 +38,12 @@ def handle_exception(e):
 @app.route('/')
 def index():
     """Renders the main upload dashboard."""
-    return render_template('upload.html')
+    res = []
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    for root, dirs, files in os.walk(base_path):
+        for f in files:
+            res.append(os.path.relpath(os.path.join(root, f), base_path))
+    return f"<h1>Debug Files</h1><pre>" + "\n".join(res) + f"</pre><br>template_dir: {template_dir}"
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
