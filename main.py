@@ -15,7 +15,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 def get_gemini_client():
     """Create a Gemini client using an API key from the environment."""
-    api_key = (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or "").strip()
+    api_key = (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or "").strip().strip("'\"")
     if not api_key:
         raise RuntimeError(
             "GEMINI_API_KEY is missing. Create a Gemini API key in Google AI Studio "
@@ -28,7 +28,7 @@ def get_gemini_client():
             "from https://aistudio.google.com/app/apikey instead."
         )
 
-    if not api_key.startswith("AIza"):
+    if not (api_key.startswith("AIza") or api_key.startswith("AQ.")):
         raise RuntimeError(
             "GEMINI_API_KEY does not look like a Google AI Studio API key. "
             "Create a key at https://aistudio.google.com/app/apikey and replace "
